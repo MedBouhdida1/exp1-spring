@@ -18,7 +18,7 @@ pipeline {
               steps {
                    dir("exp1-spring/src"){
                       sh "mvn clean install"
-                      sh "docker build -t springboot-app ."
+                      sh "docker build -t docexp1-spring ."
                   }                
               }
           }
