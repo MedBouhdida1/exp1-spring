@@ -26,7 +26,7 @@ pipeline {
               steps {
                    dir("exp1-spring"){
                       sh "docker tag docexp1-spring malbouz/docexp1-spring:1.0.0"
-                      sh "sudo docker push malbouz/docexp1-spring:1.0.0"
+                      sh "docker push malbouz/docexp1-spring:1.0.0"
                   }                
               }
           }
