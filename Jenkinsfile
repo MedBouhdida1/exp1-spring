@@ -14,7 +14,7 @@ pipeline {
                 sh "git clone https://github.com/MaBouz/exp1-spring.git"
             }
         }
-        stage("onarQube Analysis") {
+        stage("SonarQube Analysis") {
             def scannerHome = tool "sonarqub";
               withSonarQubeEnv() {
                 sh "${scannerHome}/bin/sonar-scanner"
