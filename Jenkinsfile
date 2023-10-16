@@ -24,7 +24,9 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
-                    sh 'mvn sonar:sonar'
+                    dir("exp1-spring"){
+                        sh 'mvn sonar:sonar'
+                    }
                 }
             }
         }
