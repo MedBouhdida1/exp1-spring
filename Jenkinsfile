@@ -16,7 +16,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                dir("exp1-spring"){
+                      sh "mvn clean install"
+                  }
             }
         }
         stage('SonarQube Analysis') {
