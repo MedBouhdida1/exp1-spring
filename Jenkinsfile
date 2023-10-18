@@ -24,7 +24,7 @@ pipeline {
         stage('build image') {
             steps {
                 dir("exp1-spring"){
-                    withDockerServer('Docker-server'){                            
+                    withDockerServer('Docker-1'){                            
                         sh 'docker build -t exp1-spring .'
                     }
                 }
