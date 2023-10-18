@@ -6,15 +6,13 @@ pipeline {
     environment {
         SNAP_REPO = 'vprofile-snapshot'
         NEXUS_USER = 'admin'
-        NEXUS_PASS = 'admin123'
-        RELEASE_REPO = 'vprofile-release'
+        NEXUS_PASS = 'bouzaien'
+        RELEASE_REPO = 'maven-releases'
         CENTRAL_REPO = 'vpro-maven-central'
-        NEXUSIP = '172.31.11.249'
+        NEXUSIP = '44.201.187.193'
         NEXUSPORT = '8081'
         NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexuslogin'
-        SONARSERVER = 'sonarserver'
-        SONARSCANNER = 'sonarscanner'
         NEXUSPASS = credentials('nexuspass')
     }
     stages {
@@ -48,7 +46,7 @@ pipeline {
                         artifacts: [
                             [artifactId: 'vproapp' ,
                             classifier: '',
-                            file: 'target/vprofile-v2.jar',
+                            file: 'target/*.jar',
                             type: 'jar']
                         ]
                     )
