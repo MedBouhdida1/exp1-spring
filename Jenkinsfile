@@ -32,11 +32,11 @@ pipeline {
         }
         stage('build image') {
             steps {
-                    dir("exp1-spring"){
-                        docker.withRegistry('docker-server') {
-                            sh 'docker build -t exp1-spring .'
-                        }
+                dir("exp1-spring"){
+                    withDockerServer('docker-server'){                            
+                        sh 'docker build -t exp1-spring .'
                     }
+                }
             }
         }
         
