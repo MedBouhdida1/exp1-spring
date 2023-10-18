@@ -24,13 +24,21 @@ pipeline {
         stage('build image') {
             steps {
                 dir("exp1-spring"){
-                    withDockerServer('Docker-server'){                            
+                    withDockerServer([uri: 'tcp://Docker-server:2375']){                            
                         sh 'docker build -t exp1-spring .'
                     }
                 }
             }
         }
-
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    dir("exp1-spring"){
+                        sh 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
 
         
     }
