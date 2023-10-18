@@ -3,6 +3,20 @@ pipeline {
     tools { 
         maven 'maven'
     }
+    environment {
+        SNAP_REPO = 'vprofile-snapshot'
+        NEXUS_USER = 'admin'
+        NEXUS_PASS = 'admin123'
+        RELEASE_REPO = 'vprofile-release'
+        CENTRAL_REPO = 'vpro-maven-central'
+        NEXUSIP = '172.31.11.249'
+        NEXUSPORT = '8081'
+        NEXUS_GRP_REPO = 'vpro-maven-group'
+        NEXUS_LOGIN = 'nexuslogin'
+        SONARSERVER = 'sonarserver'
+        SONARSCANNER = 'sonarscanner'
+        NEXUSPASS = credentials('nexuspass')
+    }
     stages {
         stage ("Clean up"){
             steps {
@@ -21,13 +35,24 @@ pipeline {
                   }
             }
         }
-        stage('build image') {
-            steps {
-                dir("exp1-spring"){
-                        sh 'docker build -t exp1-spring .'
-                
+        stage('UPLOAD ARTIFACT') {
+                steps {
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
+                        groupId: 'QA',
+                        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                        repository: "${RELEASE_REPO}",
+                        credentialsId: ${NEXUS_LOGIN},
+                        artifacts: [
+                            [artifactId: 'vproapp' ,
+                            classifier: '',
+                            file: 'target/vprofile-v2.jar',
+                            type: 'jar']
+                        ]
+                    )
                 }
-            }
         }
         stage('SonarQube Analysis') {
             steps {
