@@ -24,7 +24,7 @@ pipeline {
         stage('build image') {
             steps {
                 dir("exp1-spring"){
-                    withDockerServer([uri: 'tcp://Docker-server:2375']){                            
+                    withDockerServer([uri: 'tcp://52.91.240.81:2375']){                            
                         sh 'docker build -t exp1-spring .'
                     }
                 }
