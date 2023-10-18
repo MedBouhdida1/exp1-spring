@@ -21,6 +21,15 @@ pipeline {
                   }
             }
         }
+        stage('build image') {
+            steps {
+                dir("exp1-spring"){
+                    withDockerServer('docker-server'){                            
+                        sh 'docker build -t exp1-spring .'
+                    }
+                }
+            }
+        
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
@@ -30,15 +39,7 @@ pipeline {
                 }
             }
         }
-        stage('build image') {
-            steps {
-                dir("exp1-spring"){
-                    withDockerServer('docker-server'){                            
-                        sh 'docker build -t exp1-spring .'
-                    }
-                }
-            }
-        }
+}
         
     }
 }
