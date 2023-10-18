@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Analysis') {
+        stage('build image') {
             steps {
                     dir("exp1-spring"){
                         sh 'docker build -t exp1-spring .'
