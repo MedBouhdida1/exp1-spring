@@ -33,8 +33,9 @@ pipeline {
         stage('build image') {
             steps {
                     dir("exp1-spring"){
-                        sh 'scp deploy.sh ${REMOTE_USER}@${REMOTE_HOST}:~/'
-                        sh 'docker build -t exp1-spring .'
+                        docker.withRegistry('docker-server') {
+                            sh 'docker build -t exp1-spring .'
+                        }
                     }
             }
         }
