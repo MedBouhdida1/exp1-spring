@@ -35,8 +35,8 @@ pipeline {
                     dir("exp1-spring"){
                         sh 'docker build -t exp1-spring .'
                     }
-                }
             }
         }
+        
     }
 }
