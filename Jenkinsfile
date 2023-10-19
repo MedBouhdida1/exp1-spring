@@ -63,15 +63,7 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar-server') {
-                    dir("exp1-spring"){
-                        sh 'mvn sonar:sonar'
-                    }
-                }
-            }
-        }
+        
 
         
     }
